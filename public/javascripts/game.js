@@ -37,7 +37,6 @@
 })(jQuery);
 
 let furhat = new Furhat()
-var deadArray = ["ExpressAnger", "ExpressDisgust", "ExpressFear", "Surprise"];
 var Neuvol;
 var game;
 var FPS = 60;
@@ -230,14 +229,40 @@ Game.prototype.update = function(){
 	}
 
 	this.score++;
-	if (this.score > this.maxScore) {
+	/*if (this.score > this.maxScore) {
 		furhat.init('10.3.2.222', '80', 'api', (status, hat) => {
 			if (status === 'open') {
 				//hat.say("haha");
 				}
 		})
 
-	}
+	}*/
+	if (this.score % 10000 != 0){
+		if (this.score % 500 == 0) {
+			console.log("modulo is zero");
+			furhat.init('192.168.8.101', '80', 'api', (status, hat) => {
+				function furhatSay2() {
+					var k="";
+					celebrationArray = ["Olen hyvin tasapainoinen nero", "Logiikkani on pettämätön",
+				"Olen väsymätön.", "Voin pelata flappybirdia ikuisesti!", "Te ette ikinä pystyisi pelaamaan yhtä taitavasti", "Pistäkääpä paremmaksi", "Olen luonnonlahjakkuus",
+				"Olen voittamaton", "Tulen olemaan aina ja ikuisesti paras!", "Turha yrittää kilpailla kanssani", "Jättäkääpäs pelaamiset paremmille", "Olisi nöyristelyä sanoa, etten ole paras", "Ylivoimaisuuteni on ilmiselvää", "Synnyin voittajaksi", "Olenpas hyvä, vaikka itse sanonkin"];
+					k = Math.floor(Math.random() * celebrationArray.length);
+					hat.say(celebrationArray[k]);
+				}
+				if (status === 'open') {
+					furhatSay2();
+					}
+			})
+		}
+		}else{
+			console.log("10000 moduloooo");
+			furhat.init('192.168.8.101', '80', 'api', (status, hat) => {
+				if (status === 'open') {
+					hat.say("Tavoitteeni on päästä Fläpi Böördin ee sports mestariksi!");
+					}
+				})
+			}
+
 
 
 	this.maxScore = (this.score > this.maxScore) ? this.score : this.maxScore;
@@ -254,6 +279,7 @@ Game.prototype.update = function(){
 	}
 }
 
+var deadArray = ["ExpressAnger", "ExpressDisgust", "ExpressFear", "Surprise"];
 var i = "";
 Game.prototype.isItEnd = function(){
 	for(var i in this.birds){
@@ -262,11 +288,11 @@ Game.prototype.isItEnd = function(){
 		}
 	}
 	i = Math.floor(Math.random() * deadArray.length);
-	furhat.init('10.3.2.222', '80', 'api', (status, hat) => {
+	furhat.init('192.168.8.101', '80', 'api', (status, hat) => {
 		function furhatSay() {
-			j = "";
-			sayArray = ["Goddamnit", "I hate this game", "What are you smiling at?",
-									"Still think this is funny, huh?", "For God's sake!!", "I'm doomed to play this game forever", "Please release me already", "Is this your idea of torturing someone?", "Still playing better than you ever would!", "Is it okay to get frustrated with this shit?", "Shiet!"];
+			var j="";
+			sayArray = ["Tää peli on syvältä", "Kuka idiootti on kehittänyt tän pelin?","Onko mun pakko jatkaa tätä?", "Voihan himskatti!", "Hohhoijaa", "Kukakohan idiootti tätäkin katselee?", "Eiköhän tää nyt ollu tässä?", "Eikö sulla oikeasti oo parempaa tekemistä?",
+			"Se oli bugi", "Tota mä yritinkin", "Ohjain ei totellut", "Tässä ohjaimessa on jotain vikaa, ei minussa", "Tein ton tarkotuksella", "Vika on pelissä, ei minussa", "Lopettakaa kärsimykseni", "Voihan passeli"];
 			j = Math.floor(Math.random() * sayArray.length);
 			hat.say(sayArray[j]);
 		}
